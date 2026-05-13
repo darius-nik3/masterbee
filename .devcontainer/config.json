@@ -1,18 +1,12 @@
 {
-  "log": {
-    "loglevel": "warning"
-  },
   "inbounds": [
     {
-      "tag": "codespace-in",
-      "listen": "0.0.0.0",
       "port": 443,
       "protocol": "vless",
       "settings": {
         "clients": [
           {
-            "id": "550e8400-e29b-41d4-a716-446655440000",
-            "flow": ""
+            "id": "550e8400-e29b-41d4-a716-446655440000"
           }
         ],
         "decryption": "none"
@@ -28,38 +22,6 @@
   ],
   "outbounds": [
     {
-      "tag": "to-vps",
-      "protocol": "vless",
-      "settings": {
-        "vnext": [
-          {
-            "address": "api.uconnvm.com",
-            "port": 2096,
-            "users": [
-              {
-                "id": "05946e31-1338-423d-83c3-4fbe8fdf69ec",
-                "encryption": "none",
-                "flow": ""
-              }
-            ]
-          }
-        ]
-      },
-      "streamSettings": {
-        "network": "xhttp",
-        "security": "tls",
-        "tlsSettings": {
-          "serverName": "api.uconnvm.com",
-          "alpn": ["h2", "http/1.1"]
-        },
-        "xhttpSettings": {
-          "path": "/api",
-          "mode": "auto"
-        }
-      }
-    },
-    {
-      "tag": "direct",
       "protocol": "freedom"
     }
   ]
