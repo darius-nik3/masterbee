@@ -17,13 +17,11 @@ RUN echo "⚙️  Running installation script..." && \
     echo "✅ Installation completed successfully"
 
 COPY config.json /etc/config.json
-COPY keepalive.sh /app/keepalive.sh
-RUN chmod +x /app/keepalive.sh
 
 # Create startup message with clear banner
 RUN echo '#!/bin/bash' > /app/startup.sh && \
     echo 'echo ""' >> /app/startup.sh && \
-    echo 'echo "╔════════════════════════════════════════════════════════════╗"' >> /app/startup.sh && \
+    echo 'echo "╔═══════════════════════════════════════��════════════════════╗"' >> /app/startup.sh && \
     echo 'echo "║          🚀 G2RAY - XRAY SERVICE INITIALIZED 🚀           ║"' >> /app/startup.sh && \
     echo 'echo "╚════════════════════════════════════════════════════════════╝"' >> /app/startup.sh && \
     echo 'echo ""' >> /app/startup.sh && \
@@ -40,7 +38,6 @@ RUN echo '#!/bin/bash' > /app/startup.sh && \
     echo 'echo ""' >> /app/startup.sh && \
     echo 'echo "✨ Service is running and ready to accept connections..."' >> /app/startup.sh && \
     echo 'echo ""' >> /app/startup.sh && \
-    echo '/app/keepalive.sh &' >> /app/startup.sh && \
     echo 'exec /usr/local/bin/xray -c /etc/config.json' >> /app/startup.sh && \
     chmod +x /app/startup.sh
 
