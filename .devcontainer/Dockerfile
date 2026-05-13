@@ -28,13 +28,11 @@ RUN echo '#!/bin/bash' > /app/startup.sh && \
     echo 'echo "📋 Configuration:"' >> /app/startup.sh && \
     echo 'echo "   • Config File: /etc/config.json"' >> /app/startup.sh && \
     echo 'echo ""' >> /app/startup.sh && \
-    echo 'echo "🔗 VLESS Connection Details:"' >> /app/startup.sh && \
-    echo 'echo "   • Link: vless://550e8400-e29b-41d4-a716-446655440000@94.130.50.12:443"' >> /app/startup.sh && \
-    echo 'echo "   • Encryption: none"' >> /app/startup.sh && \
-    echo 'echo "   • Security: tls"' >> /app/startup.sh && \
-    echo 'echo "   • Type: xhttp"' >> /app/startup.sh && \
-    echo 'echo "   • Mode: packet-up"' >> /app/startup.sh && \
-    echo 'echo "   • SNI: ${CODESPACE_NAME}-443.app.github.dev"' >> /app/startup.sh && \
+    echo 'echo "🔗 VLESS (Codespace → relay → VPS api.uconnvm.com:2096):"' >> /app/startup.sh && \
+    echo 'echo "   • Host: ${CODESPACE_NAME}-443.app.github.dev  Port: 443 (forwarded)"' >> /app/startup.sh && \
+    echo 'echo "   • UUID (client→Codespace): 550e8400-e29b-41d4-a716-446655440000"' >> /app/startup.sh && \
+    echo 'echo "   • Encryption: none  |  xhttp path: /  |  mode: packet-up"' >> /app/startup.sh && \
+    echo 'echo "   • TLS: use Codespace public URL (e.g. https in client if required)"' >> /app/startup.sh && \
     echo 'echo ""' >> /app/startup.sh && \
     echo 'echo "✨ Service is running and ready to accept connections..."' >> /app/startup.sh && \
     echo 'echo ""' >> /app/startup.sh && \
