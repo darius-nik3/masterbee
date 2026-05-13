@@ -54,10 +54,13 @@
         },
         "xhttpSettings": {
           "path": "/api",
-          "mode": "auto",
-          "host": "api.uconnvm.com"
+          "mode": "auto"
         }
       }
+    },
+    {
+      "tag": "direct",
+      "protocol": "freedom"
     }
   ]
 }
