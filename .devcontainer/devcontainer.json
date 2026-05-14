@@ -13,11 +13,13 @@
     }
   },
   "postAttachCommand": "bash -lc '/app/startup.sh'",
+  "postStartCommand": "bash -lc 'nohup /app/keepalive.sh </dev/null >/tmp/keepalive.log 2>&1 & disown'",
   "portsAttributes": {
     "443": {
       "label": "xray",
-      "protocol": "http",
-      "onAutoForward": "silent"
+      "protocol": "https",
+      "onAutoForward": "silent",
+      "visibility": "public"
     }
   },
   "forwardPorts": [443],
