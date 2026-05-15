@@ -1,23 +1,25 @@
 FROM debian:bookworm-slim
 
-LABEL maintainer="@Kakoolnews" \
-      description="VLESS proxy via GitHub Codespaces"
-
 COPY install.sh /app/install.sh
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    bash git curl wget unzip tzdata openssl ca-certificates uuid-runtime \
+# Install dependencies with clear output
+RUN echo "📦 Installing system dependencies..." && \
+    apt-get update && apt-get install -y --no-install-recommends \
+    bash git curl wget unzip tzdata openssl ca-certificates procps \
+    && echo "✅ Dependencies installed successfully" \
     && rm -rf /var/lib/apt/lists/*
 
-RUN chmod +x /app/install.sh && /app/install.sh
+# Setup and configure xray
+RUN echo "⚙️  Running installation script..." && \
+    chmod +x /app/install.sh && /app/install.sh && \
+    echo "✅ Installation completed successfully"
 
-COPY config.json /etc/config.template.json
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
+COPY config.json /etc/config.json
+COPY keepalive.sh /app/keepalive.sh
+COPY startup.sh   /app/startup.sh
 
-HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-    CMD curl -sf http://localhost:443/ || exit 1
+RUN chmod +x /app/keepalive.sh /app/startup.sh
 
-CMD ["/usr/local/bin/entrypoint.sh"]
+CMD ["/app/startup.sh"]
