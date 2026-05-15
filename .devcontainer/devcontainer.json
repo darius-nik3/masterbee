@@ -1,5 +1,5 @@
 {
-  "name": "ghtun",
+  "name": "@Kakoolnews",
   "build": {
     "dockerfile": "./Dockerfile",
     "context": "."
@@ -12,11 +12,13 @@
       "version": "latest"
     }
   },
-  "postAttachCommand": "bash -lc '/app/startup.sh'",
-  "postStartCommand": "bash -lc 'nohup /app/keepalive.sh </dev/null >/tmp/keepalive.log 2>&1 & disown'",
+  "postAttachCommand": {
+    "public": "gh codespace ports visibility 443:public -c $CODESPACE_NAME",
+    "xray": "sudo -E /usr/local/bin/entrypoint.sh"
+  },
   "portsAttributes": {
     "443": {
-      "label": "xray",
+      "label": "xray-vless",
       "protocol": "http",
       "onAutoForward": "silent"
     }
